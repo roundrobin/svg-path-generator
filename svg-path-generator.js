@@ -34,66 +34,63 @@ Path.prototype.render  = function(){
   var cx = 0, cy = 0;
   for(var i=0; i < this.dataPoints.length; i++){
     var el = this.dataPoints[i];
-    
-
     var op = el[0];
-    
+
     if(op === 'M' || op === 'L' || op === 'm' || op === 'T'){
-    
-        cx = el[1];
+      cx = el[1];
       cy = el[2];
     }
 
     if(op === 'l' || op === 't'){
-       cx =  cx + el[1];
-     cy =  cy + el[2];
+      cx =  cx + el[1];
+      cy =  cy + el[2];
     }    
-    
+
     if(op === 'q' || op === 's'){
-       cx =  cx + el[3];
-     cy =  cy + el[4];
+      cx =  cx + el[3];
+      cy =  cy + el[4];
     }
-    
-  if(op === 'c'){
-       cx =  cx + el[5];
-     cy =  cy + el[6];
+
+    if(op === 'c'){
+    cx =  cx + el[5];
+    cy =  cy + el[6];
     }
-    
+
     if(op === 'v'){
-     cy =  cy + el[1];
+      cy =  cy + el[1];
     }
-    
-  if(op === 'h'){
-     cx =  cx + el[1];
+
+    if(op === 'h'){
+    cx =  cx + el[1];
     }
-    
+
 
     if(op === 'A'){
-        cx = el[6];
+    cx = el[6];
     cy = el[7];
     }
-    
+
     if(op === 'a'){
-        cx = cx + el[6];
-      cy = cy + el[7];
+    cx = cx + el[6];
+    cy = cy + el[7];
     }
 
-    
+
     if(op === 'C'){
-        cx = el[5];
+    cx = el[5];
     cy = el[6];
     }
     if(op === 'Q' || op === 'S'){
-        cx = el[3];
-        cy = el[4];
+    cx = el[3];
+    cy = el[4];
 
     }
-  if(op === 'H'){
-        cx = el[1];
+    if(op === 'H'){
+    cx = el[1];
 
     }
-  if(op === 'V'){
-        cy = el[1];
+    if(op === 'V'){
+    cy = el[1];
 
     }    
 
