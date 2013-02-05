@@ -1,5 +1,5 @@
 function Path(canvas, path){
-  
+  this.canvas = canvas;
   this.dataPoints = [];
   
   if(path != undefined){
@@ -7,7 +7,7 @@ function Path(canvas, path){
   
   } else {
     
-    this.path = canvas.append('svg:path')
+    this.path = this.canvas.append('svg:path')
     .attr("stroke","black")
     .attr("stroke-width",3)
     .attr("fill","none");
@@ -16,7 +16,7 @@ function Path(canvas, path){
    
 }
 Path.prototype.el  = function(wayPoint){
-	return this.path;  
+  return this.path;  
 }
 
 Path.prototype.add  = function(wayPoint){
@@ -24,9 +24,66 @@ Path.prototype.add  = function(wayPoint){
 
 }
 
+
+Path.prototype.canvas  = function(){
+   return this.canvas;
+}
+
+
 Path.prototype.render  = function(){
-  	
-   this.path.attr("d",this.pathWay());
+  var cx = 0, cy = 0;
+  for(var i=0; i < this.dataPoints.length; i++){
+    var el = this.dataPoints[i];
+    
+
+    var op = el[0];
+    
+    if(op === 'M' || op === 'L'){
+    
+        cx = el[1];
+    cy = el[2];
+    }
+    if(op === 'C'){
+        cx = el[5];
+    cy = el[6];
+    }
+    if(op === 'Q' || op === 'S' || op === 'T'){
+        cx = el[3];
+    cy = el[4];
+
+    }
+  if(op === 'H'){
+        cx = el[1];
+
+    }
+  if(op === 'V'){
+        cy = el[1];
+
+    }    
+
+    this.canvas.append("circle")
+    .attr({
+      r: 5,
+      cx: cx,
+      cy: cy,
+      fill: "#FF00FF",
+      class: "pointers",
+      opacity: "0"
+    });
+    
+  }
+  this.path.attr("d",this.pathWay());
+}
+
+Path.prototype.showPoints  = function(){
+  this.canvas.selectAll(".pointers")
+        .attr({opacity: "1"});
+  
+}
+Path.prototype.hidePoints  = function(){
+  this.canvas.selectAll(".pointers")
+        .attr({opacity: "0"});
+  
 }
 
 Path.prototype.pathWay  = function(){
@@ -34,7 +91,7 @@ Path.prototype.pathWay  = function(){
   
   for(var i=0; i < this.dataPoints.length; i++){
     var elem = this.dataPoints[i];
-    	way += elem.join(' ');
+      way += elem.join(' ');
   }
   return way;
 } 
