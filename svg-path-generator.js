@@ -67,6 +67,17 @@ Path.prototype.render  = function(){
      cx =  cx + el[1];
     }
     
+
+    if(op === 'A'){
+        cx = el[6];
+    cy = el[7];
+    }
+    
+    if(op === 'a'){
+        cx = cx + el[6];
+      cy = cy + el[7];
+    }
+
     
     if(op === 'C'){
         cx = el[5];
