@@ -38,18 +38,43 @@ Path.prototype.render  = function(){
 
     var op = el[0];
     
-    if(op === 'M' || op === 'L'){
+    if(op === 'M' || op === 'L' || op === 'm' || op === 'T'){
     
         cx = el[1];
-    cy = el[2];
+      cy = el[2];
     }
+
+    if(op === 'l' || op === 't'){
+       cx =  cx + el[1];
+     cy =  cy + el[2];
+    }    
+    
+    if(op === 'q' || op === 's'){
+       cx =  cx + el[3];
+     cy =  cy + el[4];
+    }
+    
+  if(op === 'c'){
+       cx =  cx + el[5];
+     cy =  cy + el[6];
+    }
+    
+    if(op === 'v'){
+     cy =  cy + el[1];
+    }
+    
+  if(op === 'h'){
+     cx =  cx + el[1];
+    }
+    
+    
     if(op === 'C'){
         cx = el[5];
     cy = el[6];
     }
-    if(op === 'Q' || op === 'S' || op === 'T'){
+    if(op === 'Q' || op === 'S'){
         cx = el[3];
-    cy = el[4];
+        cy = el[4];
 
     }
   if(op === 'H'){
