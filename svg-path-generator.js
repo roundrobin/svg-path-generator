@@ -52,8 +52,8 @@ Path.prototype.render  = function(){
     }
 
     if(op === 'c'){
-    cx =  cx + el[5];
-    cy =  cy + el[6];
+      cx =  cx + el[5];
+      cy =  cy + el[6];
     }
 
     if(op === 'v'){
@@ -61,25 +61,22 @@ Path.prototype.render  = function(){
     }
 
     if(op === 'h'){
-    cx =  cx + el[1];
+      cx =  cx + el[1];
     }
 
 
     if(op === 'A'){
-    cx = el[6];
-    cy = el[7];
+      cx = el[6];
+      cy = el[7];
     }
 
     if(op === 'a'){
-    cx = cx + el[6];
-    cy = cy + el[7];
+      cx = cx + el[6];
+      cy = cy + el[7];
     }
 
 
     if(op === 'C'){
-    cx = el[5];
-    cy = el[6];
-      
       this.canvas.append("circle")
       .attr({
         r: 2,
@@ -90,18 +87,21 @@ Path.prototype.render  = function(){
         opacity: "1" 
       })
       
-  this.canvas.append('line')
-  .attr({
-     stroke: "green",
-     "stroke-width":1,
-     fill: "none",
-     x1: cx,
-     x2: el[1],
-     y1: cy,
-     y2: el[2]
-    });
-      
-     this.canvas.append("circle")
+      cx = el[5];
+      cy = el[6];
+    
+      this.canvas.append('line')
+      .attr({
+        stroke: "green",
+        "stroke-width":1,
+        fill: "none",
+        x1: cx,
+        x2: el[1],
+        y1: cy,
+        y2: el[2]
+      });
+
+      this.canvas.append("circle")
       .attr({
         r: 2,
         cx: el[3],
@@ -110,53 +110,53 @@ Path.prototype.render  = function(){
         class: "pointers",
         opacity: "1" 
       })
-      
-  this.canvas.append('line')
-  .attr({
-     stroke: "green",
-     "stroke-width":1,
-     fill: "none",
-     x1: cx,
-     x2: el[3],
-     y1: cy,
-     y2: el[4]
-    });      
-      
-      
-      
-    }
-    if(op === 'Q' || op === 'S'){
-    cx = el[3];
-    cy = el[4];
-      
-      this.canvas.append("circle")
+
+      this.canvas.append('line')
       .attr({
-        r: 2,
-        cx: el[1],
-        cy: el[2],
-        fill: "#FF0000",
-        class: "pointers",
-        opacity: "1" 
-      })
-      
-  this.canvas.append('line')
-  .attr({
-     stroke: "green",
-     "stroke-width":1,
-     fill: "none",
-     x1: cx,
-     x2: el[1],
-     y1: cy,
-     y2: el[2]
-    });
+        stroke: "green",
+        "stroke-width":1,
+        fill: "none",
+        x1: cx,
+        x2: el[3],
+        y1: cy,
+        y2: el[4]
+      });      
+
+
+
+      }
+      if(op === 'Q' || op === 'S'){
+        cx = el[3];
+        cy = el[4];
+
+        this.canvas.append("circle")
+        .attr({
+          r: 2,
+          cx: el[1],
+          cy: el[2],
+          fill: "#FF0000",
+          class: "pointers",
+          opacity: "1" 
+        })
+
+        this.canvas.append('line')
+        .attr({
+          stroke: "green",
+          "stroke-width":1,
+          fill: "none",
+          x1: cx,
+          x2: el[1],
+          y1: cy,
+          y2: el[2]
+        });
 
     }
     if(op === 'H'){
-    cx = el[1];
+      cx = el[1];
 
     }
     if(op === 'V'){
-    cy = el[1];
+      cy = el[1];
 
     }    
   var self = this;
