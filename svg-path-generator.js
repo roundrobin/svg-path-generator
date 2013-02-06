@@ -227,7 +227,7 @@ Path.prototype.hidePoints  = function(){
 }
 
 Path.prototype.scale  = function(scaleFactor){
-  this.canvas.attr({transform: scaleFactor});       
+  this.canvas.attr({transform: 'scale('+(scaleFactor)+')'});       
   
 }
 
