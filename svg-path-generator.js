@@ -77,19 +77,7 @@ Path.prototype.render  = function(){
 
 
     if(op === 'C'){
-      this.canvas.append("circle")
-      .attr({
-        r: 2,
-        cx: el[1],
-        cy: el[2],
-        fill: "#FF0000",
-        class: "pointers",
-        opacity: "1" 
-      })
-      
-      cx = el[5];
-      cy = el[6];
-    
+  
       this.canvas.append('line')
       .attr({
         stroke: "green",
@@ -100,6 +88,19 @@ Path.prototype.render  = function(){
         y1: cy,
         y2: el[2]
       });
+
+      cx = el[5];
+      cy = el[6];
+      
+      this.canvas.append("circle")
+      .attr({
+        r: 2,
+        cx: el[1],
+        cy: el[2],
+        fill: "#FF0000",
+        class: "pointers",
+        opacity: "1" 
+      })
 
       this.canvas.append("circle")
       .attr({
