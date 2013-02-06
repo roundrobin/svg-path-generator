@@ -216,6 +216,9 @@ Path.prototype.showPoints  = function(){
 Path.prototype.hidePoints  = function(){
   this.canvas.selectAll(".pointers")
         .attr({opacity: "0"});
+
+  this.canvas.selectAll(".line")
+        .attr({opacity: "0"});        
   
 }
 
