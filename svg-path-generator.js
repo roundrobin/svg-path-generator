@@ -216,12 +216,18 @@ Path.prototype.showPoints  = function(){
         .attr({opacity: "1"});           
   
 }
+
 Path.prototype.hidePoints  = function(){
   this.canvas.selectAll(".pointers")
         .attr({opacity: "0"});
 
   this.canvas.selectAll(".line")
         .attr({opacity: "0"});        
+  
+}
+
+Path.prototype.scale  = function(scaleFactor){
+  this.canvas.attr({transform: scaleFactor});       
   
 }
 
