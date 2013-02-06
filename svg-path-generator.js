@@ -86,7 +86,8 @@ Path.prototype.render  = function(){
         x1: cx,
         x2: el[1],
         y1: cy,
-        y2: el[2]
+        y2: el[2],
+        class: "line"        
       });
 
       cx = el[5];
@@ -120,7 +121,8 @@ Path.prototype.render  = function(){
         x1: cx,
         x2: el[3],
         y1: cy,
-        y2: el[4]
+        y2: el[4],
+        class: "line"                
       });      
 
 
@@ -148,7 +150,8 @@ Path.prototype.render  = function(){
           x1: cx,
           x2: el[1],
           y1: cy,
-          y2: el[2]
+          y2: el[2],
+          class: "line"                   
         });
 
     }
@@ -178,7 +181,8 @@ Path.prototype.render  = function(){
     }) 
     .on("dragstart", function(d, i) {})
     .on("dragend", function(d, i) {
-    self.canvas.selectAll('.pointers').remove();
+      self.canvas.selectAll('.line').remove();
+      self.canvas.selectAll('.pointers').remove();
       self.render()});
     
      
