@@ -79,10 +79,76 @@ Path.prototype.render  = function(){
     if(op === 'C'){
     cx = el[5];
     cy = el[6];
+      
+      this.canvas.append("circle")
+      .attr({
+        r: 2,
+        cx: el[1],
+        cy: el[2],
+        fill: "#FF0000",
+        class: "pointers",
+        opacity: "1" 
+      })
+      
+  this.canvas.append('line')
+  .attr({
+     stroke: "green",
+     "stroke-width":1,
+     fill: "none",
+     x1: cx,
+     x2: el[1],
+     y1: cy,
+     y2: el[2]
+    });
+      
+     this.canvas.append("circle")
+      .attr({
+        r: 2,
+        cx: el[3],
+        cy: el[4],
+        fill: "#FF0000",
+        class: "pointers",
+        opacity: "1" 
+      })
+      
+  this.canvas.append('line')
+  .attr({
+     stroke: "green",
+     "stroke-width":1,
+     fill: "none",
+     x1: cx,
+     x2: el[3],
+     y1: cy,
+     y2: el[4]
+    });      
+      
+      
+      
     }
     if(op === 'Q' || op === 'S'){
     cx = el[3];
     cy = el[4];
+      
+      this.canvas.append("circle")
+      .attr({
+        r: 2,
+        cx: el[1],
+        cy: el[2],
+        fill: "#FF0000",
+        class: "pointers",
+        opacity: "1" 
+      })
+      
+  this.canvas.append('line')
+  .attr({
+     stroke: "green",
+     "stroke-width":1,
+     fill: "none",
+     x1: cx,
+     x2: el[1],
+     y1: cy,
+     y2: el[2]
+    });
 
     }
     if(op === 'H'){
@@ -93,21 +159,36 @@ Path.prototype.render  = function(){
     cy = el[1];
 
     }    
-
+  var self = this;
     var drag = d3.behavior.drag()
-    .on("drag", function(d,i){console.log('draggin',d,i,d3.select(this).data())})
+    .on("drag", function(d,i){
+      var elem = d3.select(this).datum();
+      var it = self.dataPoints[elem.index];
+      console.log('draggin',it);
+      
+      if(it[0] === 'l' || it[0] === 'm'){
+        self.dataPoints[elem.index][1] += d3.event.dx;
+      self.dataPoints[elem.index][2] += d3.event.dy;
+      }
+      //
+      //self.render()
+      //self.showPoints()
+
+    }) 
     .on("dragstart", function(d, i) {})
-    .on("dragend", function(d, i) {});
+    .on("dragend", function(d, i) {
+    self.canvas.selectAll('.pointers').remove();
+      self.render()});
     
-    
+     
     this.canvas.append("circle")
     .attr({
       r: 5,
       cx: cx,
       cy: cy,
-      fill: "#FF00FF",
+      fill: "#FFF583",
       class: "pointers",
-      opacity: "0"
+      opacity: "1" 
     })
     .call(drag)
     .datum({type: el, index: i});
@@ -142,3 +223,4 @@ Path.prototype.pathWay  = function(){
   }
   return way;
 } 
+
