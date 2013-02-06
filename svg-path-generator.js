@@ -52,8 +52,8 @@ Path.prototype.render  = function(){
     }
 
     if(op === 'c'){
-    cx =  cx + el[5];
-    cy =  cy + el[6];
+      cx =  cx + el[5];
+      cy =  cy + el[6];
     }
 
     if(op === 'v'){
@@ -61,38 +61,41 @@ Path.prototype.render  = function(){
     }
 
     if(op === 'h'){
-    cx =  cx + el[1];
+      cx =  cx + el[1];
     }
 
 
     if(op === 'A'){
-    cx = el[6];
-    cy = el[7];
+      cx = el[6];
+      cy = el[7];
     }
 
     if(op === 'a'){
-    cx = cx + el[6];
-    cy = cy + el[7];
+      cx = cx + el[6];
+      cy = cy + el[7];
     }
 
 
     if(op === 'C'){
-    cx = el[5];
-    cy = el[6];
+      cx = el[5];
+      cy = el[6];
     }
     if(op === 'Q' || op === 'S'){
-    cx = el[3];
-    cy = el[4];
+      cx = el[3];
+      cy = el[4];
 
     }
     if(op === 'H'){
-    cx = el[1];
-
+      cx = el[1];
     }
     if(op === 'V'){
-    cy = el[1];
+      cy = el[1];
 
     }    
+    var dragPoint = d3.behavior.drag()
+      .on("drag", function(){ console.log('Dragging')})
+      .on("dragstart", function(d, i) {})
+      .on("dragend", function(d, i) {});
 
     this.canvas.append("circle")
     .attr({
@@ -102,11 +105,19 @@ Path.prototype.render  = function(){
       fill: "#FF00FF",
       class: "pointers",
       opacity: "0"
-    });
+    })
+    .data({type: el, nr: i})
+    .call(drag);
     
   }
   this.path.attr("d",this.pathWay());
 }
+
+Path.prototype.read  = function(string_delta){
+     this.dataPoints = [];
+  
+}
+
 
 Path.prototype.showPoints  = function(){
   this.canvas.selectAll(".pointers")
