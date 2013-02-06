@@ -211,6 +211,9 @@ Path.prototype.read  = function(string_delta){
 Path.prototype.showPoints  = function(){
   this.canvas.selectAll(".pointers")
         .attr({opacity: "1"});
+
+  this.canvas.selectAll(".line")
+        .attr({opacity: "1"});           
   
 }
 Path.prototype.hidePoints  = function(){
