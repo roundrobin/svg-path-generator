@@ -5,6 +5,9 @@
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script type="text/javascript" src='svg-path-generator.js'></script>
 	<style type="text/css">
+			body{
+				font-family: 'Arial';
+			}
 			svg{
 				background: #cacaca;
 			}
@@ -12,34 +15,89 @@
 </head>
 <body>
 <h1>SVG Path Library Test</h1>
-<svg with='100%' height='100%' viewBox='0 0 1280 610'>
-</svg>
+<svg width='33%' height='33%' viewBox='0 0 400 400' id='canvas1'></svg>
+<svg width='33%' height='33%' viewBox='0 0 400 400' id='canvas2'></svg>
+<svg width='33%' height='33%' viewBox='0 0 400 400' id='canvas3'></svg>
+
+<svg width='33%' height='33%' viewBox='0 0 400 400' id='canvas4'></svg>
 
 <script type="text/javascript">
+	
+
+	//====================================Canvas 2 ======================================== 
+	
 	//Grab our svg canvas 
-	var svg = d3.select("svg");
+	var svg = d3.select("#canvas1");
+	var width = 400;
+	var height = 400;
 	
 	//Create a Path object
 	var path = new Path(svg)
-
+			path.canvasDOM().attr({'transform': 'translate('+[width/2,height/3]+')'})
 	//Adds lines and curves to the path
-	path.add(['m',200,100]);
+	path.add(['m',0,0]);
 	path.add(['l',100,100]);
-	path.add(['v',50]);
-	path.add(['h',50]);
-	path.add(['q',50,50,30,80]);
-	path.add(['c',50,50,30,80,50,90]);
-	path.add(['t',-50,-50]);
-	path.add(['s',50,100,-130,-80]);
+	path.add(['l',-100,0]);
+	path.add(['l',-100,0]);
+	path.close();
 
-	path.add(['a',50,50,1, 1,1,-71,50]);
-	path.add(['A',5,5,1, 1,1,100,153]);
 
 	//Render the path element on the canvas
 	path.render();
 
 	//Show the hidden bezier handler points
-	path.showPoints()   
+	path.showPoints();  
+
+
+	//====================================Canvas 2 ======================================== 
+
+		var svg = d3.select("#canvas2");
+		var width = 400;
+		var height = 400;
+		
+		//Create a Path object
+		var path = new Path(svg)
+				path.canvasDOM().attr({'transform': 'translate('+[width/2,height/3]+')'})
+		//Adds lines and curves to the path
+		path.add(['m',0,0]);
+		path.add(['q',50,50,100,100]);
+		path.add(['q',-100,50,-200,0]);
+		path.add(['q',50,-100,100,-100]);
+		path.add(['c',50,-100,0,-50,200,200]);
+		
+
+
+		//Render the path element on the canvas
+		path.render();
+
+		//Show the hidden bezier handler points
+		path.showPoints();
+
+		//====================================Canvas 3 ======================================== 
+
+		var svg = d3.select("#canvas3");
+		var width = 400;
+		var height = 400;
+		
+		//Create a Path object
+		var path = new Path(svg)
+				path.canvasDOM().attr({'transform': 'translate('+[width/2,height/3]+')'})
+		//Adds lines and curves to the path
+		path.add(['M',0,0]);
+		path.add(['Q',100,50,100,100]);
+		path.add(['Q',-120,50,-100,100]);
+
+		path.add(['V',-100]);
+		path.add(['H',100]);
+		path.add(['L',150,100]);
+		//path.close();
+
+
+		//Render the path element on the canvas
+		path.render();
+
+		//Show the hidden bezier handler points
+		path.showPoints();
 
 </script>
 </body>

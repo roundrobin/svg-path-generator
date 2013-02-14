@@ -6,13 +6,10 @@ function Path(canvas, path){
       this.path = path;
   
   } else {
-    console.log("LOG:","this",this.canvasEl);
+    
 
-    this.canvas = canvas.append("g")
-                    .attr({
-                      transform: "translate("+[0,0]+")",
-                      class: "path-group"
-                    });
+    var transform = { transform: "translate("+[0,0]+")", class: "path-group" };
+    this.canvas = canvas.append("g").attr(transform);
       
     
 
@@ -35,21 +32,38 @@ Path.prototype.add  = function(wayPoint){
 }
 
 
-Path.prototype.canvas  = function(){
+Path.prototype.canvasDOM  = function(){
    return this.canvas;
+}
+
+Path.prototype.close  = function(){
+   this.dataPoints.push(['z'  ]);
 }
 
 
 Path.prototype.render  = function(){
+    var attrGenericLine = {
+        stroke: "green",
+        "stroke-width":1,
+        fill: "none",
+        'class' : 'line'
+    };
+
+    var attrGenericCircle = {
+        fill: "yellow",
+        class: "pointers",
+        opacity: 1,
+        r : 7,
+        'class' : 'pointers'
+    };
+
   var cx = 0, cy = 0;
+
+
   for(var i=0; i < this.dataPoints.length; i++){
+
     var el = this.dataPoints[i];
     var op = el[0];
-
-    if(op === 'M' || op === 'L' || op === 'm' || op === 'T'){
-      cx = el[1];
-      cy = el[2];
-    }
 
     if(op === 'l' || op === 't'){
       cx =  cx + el[1];
@@ -57,13 +71,26 @@ Path.prototype.render  = function(){
     }    
 
     if(op === 'q' || op === 's'){
+
+      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: cx + el[1], y1: cy, y2: cy + el[2]});
+      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx + el[1], cy: cy + el[2]});
+
       cx =  cx + el[3];
       cy =  cy + el[4];
+
+      
     }
 
     if(op === 'c'){
+
+      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: cx + el[1], y1: cy, y2: cy + el[2]});
+      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx + el[1], cy: cy + el[2]});
+
       cx =  cx + el[5];
       cy =  cy + el[6];
+
+      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: cx + el[3], y1: cy, y2: cy + el[4]});
+      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx + el[3], cy: cy + el[4]});
     }
 
     if(op === 'v'){
@@ -75,95 +102,45 @@ Path.prototype.render  = function(){
     }
 
 
-    if(op === 'A'){
-      cx = el[6];
-      cy = el[7];
+    if(op === 'M' || op === 'L' || op === 'm' || op === 'T'){
+      cx = el[1];
+      cy = el[2];
     }
+
 
     if(op === 'a'){
       cx = cx + el[6];
       cy = cy + el[7];
     }
 
+    if(op === 'A'){
+      cx = el[6];
+      cy = el[7];
+    }
+
 
     if(op === 'C'){
   
       this.canvas.append('line')
-      .attr({
-        stroke: "green",
-        "stroke-width":1,
-        fill: "none",
-        x1: cx,
-        x2: el[1],
-        y1: cy,
-        y2: el[2],
-        class: "line"        
-      });
+      .attr(attrGeneric)
+      .attr({ x1: cx, x2: el[1], y1: cy, y2: el[2]});
 
       cx = el[5];
       cy = el[6];
       
-      this.canvas.append("circle")
-      .attr({
-        r: 2,
-        cx: el[1],
-        cy: el[2],
-        fill: "#FF0000",
-        class: "pointers",
-        opacity: "1" 
-      })
-
-      this.canvas.append("circle")
-      .attr({
-        r: 2,
-        cx: el[3],
-        cy: el[4],
-        fill: "#FF0000",
-        class: "pointers",
-        opacity: "1" 
-      })
-
-      this.canvas.append('line')
-      .attr({
-        stroke: "green",
-        "stroke-width":1,
-        fill: "none",
-        x1: cx,
-        x2: el[3],
-        y1: cy,
-        y2: el[4],
-        class: "line"                
-      });      
-
-
-
+      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: el[1], cy: el[2]});
+      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: el[3], cy: el[4]});
+      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: el[3], y1: cy, y2: el[4]});
+   
       }
+
       if(op === 'Q' || op === 'S'){
         cx = el[3];
         cy = el[4];
 
-        this.canvas.append("circle")
-        .attr({
-          r: 2,
-          cx: el[1],
-          cy: el[2],
-          fill: "#FF0000",
-          class: "pointers",
-          opacity: "1" 
-        })
-
-        this.canvas.append('line')
-        .attr({
-          stroke: "green",
-          "stroke-width":1,
-          fill: "none",
-          x1: cx,
-          x2: el[1],
-          y1: cy,
-          y2: el[2],
-          class: "line"                   
-        });
-
+      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: el[1], cy: el[2]});
+      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: el[3], y1: cy, y2: el[4]});
+      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: el[1], y1: cy, y2: el[2]});
     }
     if(op === 'H'){
       cx = el[1];
@@ -173,39 +150,10 @@ Path.prototype.render  = function(){
       cy = el[1];
 
     }    
-  var self = this;
-    var drag = d3.behavior.drag()
-    .on("drag", function(d,i){
-      var elem = d3.select(this).datum();
-      var it = self.dataPoints[elem.index];
-      console.log('draggin',it);
-      
-      if(it[0] === 'l' || it[0] === 'm'){
-        self.dataPoints[elem.index][1] += d3.event.dx;
-      self.dataPoints[elem.index][2] += d3.event.dy;
-      }
-      //
-      //self.render()
-      //self.showPoints()
-
-    }) 
-    .on("dragstart", function(d, i) {})
-    .on("dragend", function(d, i) {
-      self.canvas.selectAll('.line').remove();
-      self.canvas.selectAll('.pointers').remove();
-      self.render()});
     
-     
     this.canvas.append("circle")
-    .attr({
-      r: 5,
-      cx: cx,
-      cy: cy,
-      fill: "#FFF583",
-      class: "pointers",
-      opacity: "1" 
-    })
-    .call(drag)
+    .attr(attrGenericCircle)
+    .attr({cx :cx, cy: cy})
     .datum({type: el, index: i});
     
   }
