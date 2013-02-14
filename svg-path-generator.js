@@ -1,18 +1,23 @@
 function Path(canvas, path){
-  this.canvasEl = canvas;
+  this.canvas = canvas;
   this.dataPoints = [];
   
   if(path != undefined){
       this.path = path;
   
   } else {
-    this.canvasEl = this.canvasEl
-                    .append("g")
-                    .attr({class: "path-group"});
+    console.log("LOG:","this",this.canvasEl);
+
+    this.canvas = canvas.append("g")
+                    .attr({
+                      transform: "translate("+[0,0]+")",
+                      class: "path-group"
+                    });
+      
     
 
 
-    this.path = this.canvasEl.append('svg:path')
+    this.path = this.canvas.append('svg:path')
     .attr("stroke","black")
     .attr("stroke-width",3)
     .attr("fill","none");
@@ -31,7 +36,7 @@ Path.prototype.add  = function(wayPoint){
 
 
 Path.prototype.canvas  = function(){
-   return this.canvasEl;
+   return this.canvas;
 }
 
 
