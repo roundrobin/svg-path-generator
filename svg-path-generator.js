@@ -6,7 +6,12 @@ function Path(canvas, path){
       this.path = path;
   
   } else {
+    this.canvas = this.canvas
+                    .append("g")
+                    .attr({class: "path-group"});
     
+
+
     this.path = this.canvas.append('svg:path')
     .attr("stroke","black")
     .attr("stroke-width",3)
@@ -227,7 +232,7 @@ Path.prototype.hidePoints  = function(){
 }
 
 Path.prototype.scale  = function(scaleFactor){
-  this.canvas.attr({transform: 'scale('+(scaleFactor)+')'});       
+    this.canvas.attr({transform: 'scale('+(scaleFactor)+')'});       
   
 }
 
