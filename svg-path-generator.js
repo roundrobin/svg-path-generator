@@ -46,13 +46,14 @@ Path.prototype.render  = function(){
         stroke: "green",
         "stroke-width":1,
         fill: "none",
-        'class' : 'line'
+        'class' : 'line',
+        opacity: 0
     };
 
     var attrGenericCircle = {
         fill: "yellow",
         class: "pointers",
-        opacity: 1,
+        opacity: 0,
         r : 7,
         'class' : 'pointers'
     };
