@@ -1,18 +1,18 @@
 function Path(canvas, path){
-  this.canvas = canvas;
+  this.canvasEl = canvas;
   this.dataPoints = [];
   
   if(path != undefined){
       this.path = path;
   
   } else {
-    this.canvas = this.canvas
+    this.canvasEl = this.canvasEl
                     .append("g")
                     .attr({class: "path-group"});
     
 
 
-    this.path = this.canvas.append('svg:path')
+    this.path = this.canvasEl.append('svg:path')
     .attr("stroke","black")
     .attr("stroke-width",3)
     .attr("fill","none");
@@ -31,7 +31,7 @@ Path.prototype.add  = function(wayPoint){
 
 
 Path.prototype.canvas  = function(){
-   return this.canvas;
+   return this.canvasEl;
 }
 
 
