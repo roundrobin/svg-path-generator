@@ -87,8 +87,8 @@ Path.prototype.render  = function(){
       cx =  cx + el[5];
       cy =  cy + el[6];
 
-      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: cx - el[3], y1: cy, y2: cy + el[4]});
-      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx - el[3], cy: cy + el[4]});
+      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: cx + el[3], y1: cy, y2: cy + el[4]});
+      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx + el[3], cy: cy + el[4]});
     }
 
     if(op === 'v'){
@@ -125,20 +125,20 @@ Path.prototype.render  = function(){
 
       cx = el[5];
       cy = el[6];
-      
+
       this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: el[1], cy: el[2]});
       this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: el[3], cy: el[4]});
       this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: el[3], y1: cy, y2: el[4]});
-   
-      }
 
-      if(op === 'Q' || op === 'S'){
+    }
+
+    if(op === 'Q' || op === 'S'){
         cx = el[3];
         cy = el[4];
 
-      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: el[1], cy: el[2]});
-      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: el[3], y1: cy, y2: el[4]});
-      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: el[1], y1: cy, y2: el[2]});
+        this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: el[1], cy: el[2]});
+        this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: el[3], y1: cy, y2: el[4]});
+        this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: el[1], y1: cy, y2: el[2]});
     }
     if(op === 'H'){
       cx = el[1];
