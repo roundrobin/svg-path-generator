@@ -88,7 +88,7 @@ Path.prototype.render  = function(){
       this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx + el[1], cy: cy + el[2]});
 
       this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx + el[5], x2: cx + el[3], y1: cy + el[6], y2: cy + el[4]});
-      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx + el[5], cy: cy + el[6]});
+      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx + el[3], cy: cy + el[4]});
 
       cx =  cx + el[5];
       cy =  cy + el[6];
