@@ -10,10 +10,7 @@ function Path(canvas, path){
 
     var transform = { transform: "translate("+[0,0]+")", class: "path-group" };
     this.canvas = canvas.append("g").attr(transform);
-      
-    
-
-
+        
     this.path = this.canvas.append('svg:path')
     .attr("stroke","black")
     .attr("stroke-width",3)
@@ -90,8 +87,8 @@ Path.prototype.render  = function(){
       cx =  cx + el[5];
       cy =  cy + el[6];
 
-      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: cx + el[3], y1: cy, y2: cy + el[4]});
-      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx + el[3], cy: cy + el[4]});
+      this.canvas.append('line').attr(attrGenericLine).attr({ x1: cx, x2: cx - el[3], y1: cy, y2: cy + el[4]});
+      this.canvas.append("circle").attr(attrGenericCircle).attr({ cx: cx - el[3], cy: cy + el[4]});
     }
 
     if(op === 'v'){

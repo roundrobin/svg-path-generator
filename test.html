@@ -19,7 +19,8 @@
 <svg width='33%' height='33%' viewBox='0 0 400 400' id='canvas2'></svg>
 <svg width='33%' height='33%' viewBox='0 0 400 400' id='canvas3'></svg>
 
-<svg width='33%' height='33%' viewBox='0 0 400 400' id='canvas4'></svg>
+<svg width='50%' height='33%' viewBox='0 0 400 400' id='canvas4'></svg>
+<svg width='40%' height='33%' viewBox='0 0 400 400' id='canvas5'></svg>
 
 <script type="text/javascript">
 	
@@ -98,6 +99,104 @@
 
 		//Show the hidden bezier handler points
 		path.showPoints();
+
+		//====================================Canvas 4 ======================================== 
+
+		var svg = d3.select("#canvas4");
+		//Uses the svg-path-generator class
+		//https://github.com/roundrobin/svg-path-generator
+		var path = new Path(svg)
+		path.canvasDOM().attr({transform:'translate(600,150)'})
+
+		path.add(['m',0,0]);
+		path.add(['q',100,100,100,100]);
+		path.add(['q',-100,0,-100,0]);
+		path.add(['q',-100,0,-100,0]);
+		path.add(['q',100,-100,100,-100]);
+		
+
+
+
+
+		var path2 = new Path(svg)
+		path2.canvasDOM().attr({transform:'translate(0,150)'})
+		path2.add(['m',0,0]);
+		path2.add(['q',100,100,100,100]);
+		path2.add(['q',-100,100,-100,100]);
+		path2.add(['q',-100,-100,-100,-100]);
+		path2.add(['q',100,-100,100,-100]);
+
+		var path3 = new Path(svg)
+		path3.canvasDOM().attr({transform:'translate(150,150)'})
+		path3.add(['m',0,0]);
+		path3.add(['q',100,0,100,100]);
+		path3.add(['q',0,100,-100,100]);
+		path3.add(['q',-100,0,-100,-100]);
+		path3.add(['q',0,-100,100,-100]);
+
+		var path4 = new Path(svg)
+		path4.canvasDOM().attr({transform:'translate(300,150)'})
+		path4.add(['m',0,0]);
+		path4.add(['q',100,100,100,100]);
+		path4.add(['q',0,100,-100,100]);
+		path4.add(['q',-100,0,-100,-100]);
+		path4.add(['q',	100,-100,100,-100]);
+
+
+		var path5 = new Path(svg)
+		path5.canvasDOM().attr({transform:'translate(400,150)'})
+		path5.add(['m',0,0]);
+		path5.add(['q',100,100,100,100]);
+		path5.add(['q',0,100,-100,100]);
+		path5.add(['q',0,0,0,-100]);
+		path5.add(['q',	0,-100,0,-100]);			
+		
+		path.render();
+		path2.render();
+		path3.render();
+		path4.render();
+		path5.render();
+		//path2.showPoints()
+
+
+		var pathLong1 = path.el().attr('d');
+		var pathLong2 = path2.el().attr('d');
+		var pathLong3 = path3.el().attr('d');
+		var pathLong4 = path4.el().attr('d');
+		var pathLong5 = path5.el().attr('d');
+		
+		path.el()
+			.transition()
+				.duration(2000)
+				.delay(0)
+				.attr({d: pathLong2})
+		  .transition()	
+		    .duration(2000)
+				.delay(2000)
+				.attr({d: pathLong3})
+		  .transition()	
+		    .duration(2000)
+				.delay(4000)
+				.attr({d: pathLong4})
+			.transition()	
+		    .duration(2000)
+				.delay(6000)
+				.attr({d: pathLong5})
+			.transition()	
+		    .duration(2000)
+				.delay(8000)
+				.attr({d: pathLong1})				
+ 		
+
+
+ 			var svg = d3.select("#canvas5");
+			var path4 = new Path(svg)
+			path4.canvasDOM().attr({transform:'translate(100,150)'})
+			path4.add(['m',10,0]);
+			path4.add(['c',45,99,91,-49, 200,0]);
+
+			path4.render();
+			path4.showPoints();
 
 </script>
 </body>
